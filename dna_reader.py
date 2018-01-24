@@ -5,13 +5,10 @@
 def pattern_count(Text, Pattern):
     # fill in your function here
     count = 0
-    i = 0
     patternLength = len(Pattern)
-    while i < len(Text) - (patternLength-1):
-        testPattern = Text[i: i + patternLength]
-        if testPattern == Pattern:
+    for i in range(0, len(Text) - patternLength+1):
+        if Pattern == Text[i: i + patternLength]:
             count += 1
-        i += 1
     return count
 
 def frequent_words(Text, k):

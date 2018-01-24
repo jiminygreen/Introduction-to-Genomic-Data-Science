@@ -11,7 +11,7 @@ class TestDnaFixture(unittest.TestCase):
         #TestDnaHelper.pattern_count(self, 'GCGCG', 'GCG') # Also works
         count = dna_reader.pattern_count('GCGCG', 'GCG')
         self.assertEqual(2, count)
-        self.assertEqual(4, dna_reader.pattern_count('CGCGATACGTTACATACATGATAGACCGCGCGCGATCATATCGCGATTATC', 'CGCG'))
+        self.assertEqual(5, dna_reader.pattern_count('CGCGATACGTTACATACATGATAGACCGCGCGCGATCATATCGCGATTATC', 'CGCG'))
 
 
     def test_frequent_word_count_correct(self):
