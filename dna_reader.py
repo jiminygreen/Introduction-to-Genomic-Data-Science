@@ -72,6 +72,29 @@ def computing_frequencies(Text, k):
 
     return frequencys
 
+def reverse_complement(Pattern):
+    result = ''
+    for n in Pattern:
+        if n == 'A': result += 'T'
+        elif n == 'T': result += 'A'
+        elif n == 'C': result += 'G'
+        elif n == 'G': result += 'C'
+
+    return result[::-1]
+
+
+def pattern_matching(Pattern, Genome):
+    pos_record = []
+    patternLength = len(Pattern)
+    search_len = len(Genome) - patternLength+1 
+
+    for i in range(0, search_len):
+        if Pattern == Genome[i: i + patternLength]:
+            pos_record.append(i)
+
+    return pos_record
+
+
 # ComputingFrequencies(Text, k)
 #         for i ← 0 to 4k − 1
 #             FrequencyArray(i) ← 0

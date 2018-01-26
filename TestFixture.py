@@ -55,5 +55,13 @@ class TestDnaFixture(unittest.TestCase):
         self.assertEqual([2, 1, 0, 0, 0, 0, 2, 2, 1, 2, 1, 0, 0, 1, 1, 0], 
         dna_reader.computing_frequencies('ACGCGGCTCTGAAA', 2))
 
+
+    def test_reverse_complement(self):
+        self.assertEqual('ACCGGGTTTT', dna_reader.reverse_complement('AAAACCCGGT') )
+
+
+    def test_pattern_matching(self):
+        self.assertEqual([1, 3, 9], dna_reader.pattern_matching('ATAT', 'GATATATGCATATACTT'))
+
 if __name__ == '__main__':
     unittest.main()
