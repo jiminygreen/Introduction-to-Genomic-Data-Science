@@ -8,5 +8,7 @@
     ],
     "python.unitTest.unittestEnabled": true,
     "python.pythonPath": "C:\\Users\\gcollins\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false
 }

@@ -15,10 +15,11 @@ class TestDnaFixture(unittest.TestCase):
 
 
     def test_frequent_word_count_correct(self):
-        #dna = TestDnaHelper()
         self.assertEqual(['GCAT', 'CATG'], dna_reader.frequent_words('ACGTTGCATGTCGCATGATGCATGAGAGCT', 4))
 
-        print(dna_reader.frequent_words('CGGAGGACTCTAGGTAACGCTTATCAGGTCCATAGGACATTCA', 3))
+        #print(dna_reader.frequent_words('CGGAGGACTCTAGGTAACGCTTATCAGGTCCATAGGACATTCA', 3))
+
+        #print(dna_reader.frequent_words('CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGAGTGAAGAGAAGAGGAAACATTGTAA', 5))
 
     def test_symbol_to_number_returns_correct_value(self):
         
@@ -41,16 +42,14 @@ class TestDnaFixture(unittest.TestCase):
     def test_pattern_to_6_kmer_number_returns_correct_output(self):
         self.assertEqual(912, dna_reader.pattern_to_number('ATGCAA'))
 
-#0*4 + 3*4 + 2*4 + 1*4 + 0*4 + 0
-# 0 + 12 + 8 + 4 + 0 + 0
-# bedmas
 
     def test_number_to_pattern_is_correct(self):
         self.assertEqual('ATGCAA', dna_reader.number_to_pattern(912, 6))
         self.assertEqual('AGTC', dna_reader.number_to_pattern(45, 4))
         self.assertEqual('CCCATTC', dna_reader.number_to_pattern(5437, 7))
         self.assertEqual('ACCCATTC', dna_reader.number_to_pattern(5437, 8))
-        
+
+
     def test_computing_frequencies(self):
         self.assertEqual([2, 1, 0, 0, 0, 0, 2, 2, 1, 2, 1, 0, 0, 1, 1, 0], 
         dna_reader.computing_frequencies('ACGCGGCTCTGAAA', 2))
@@ -62,6 +61,21 @@ class TestDnaFixture(unittest.TestCase):
 
     def test_pattern_matching(self):
         self.assertEqual([1, 3, 9], dna_reader.pattern_matching('ATAT', 'GATATATGCATATACTT'))
+
+
+    def test_clump_finding(self):
+        self.assertEqual(['CGACA', 'GAAGA'], dna_reader.clump_finding('CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGAGTGAAGAGAAGAGGAAACATTGTAA', 5, 50, 4))
+
+    # def test_pattern_matching_large_data_set(self):
+    #     f = open("./Vibrio_cholerae.txt", 'r')
+    #     genome = f.read()
+    #     f.close()
+    #     print(dna_reader.pattern_matching('CTTGATCAT', genome))
+    #     print(dna_reader.pattern_matching('ATGATCAAG', genome)) # the reverce compliment
+# [60039, 98409, 129189, 152283, 152354, 152411, 163207, 197028, 200160, 357976, 376771, 392723, 532935, 600085, 622755, 1065555]
+# [116556, 149355, 151913, 152013, 152394, 186189, 194276, 200076, 224527, 307692, 479770, 610980, 653338, 679985, 768828, 878903, 985368]        
+
+        # print(dna_reader.computing_frequencies(genome, 9).count()) # not working. looks to be a bad charater not handled in symbol_to_number(...)
 
 if __name__ == '__main__':
     unittest.main()
