@@ -54,6 +54,11 @@ class TestDnaFixture(unittest.TestCase):
         self.assertEqual([2, 1, 0, 0, 0, 0, 2, 2, 1, 2, 1, 0, 0, 1, 1, 0], 
         dna_reader.computing_frequencies('ACGCGGCTCTGAAA', 2))
 
+        # print(dna_reader.computing_frequencies('CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGA', 5))
+        # print(dna_reader.pattern_matching('CGACA', 'CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGA'))
+        # print(dna_reader.pattern_count('CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGA','CGACA'))
+        
+
 
     def test_reverse_complement(self):
         self.assertEqual('ACCGGGTTTT', dna_reader.reverse_complement('AAAACCCGGT') )
@@ -61,11 +66,13 @@ class TestDnaFixture(unittest.TestCase):
 
     def test_pattern_matching(self):
         self.assertEqual([1, 3, 9], dna_reader.pattern_matching('ATAT', 'GATATATGCATATACTT'))
+        print(dna_reader.pattern_matching('CGC', 'ATGACTTCGCTGTTACGCGC')) 
 
 
     def test_clump_finding(self):
-        self.assertEqual(['CGACA', 'GAAGA'], dna_reader.clump_finding('CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGAGTGAAGAGAAGAGGAAACATTGTAA', 5, 50, 4))
-
+        self.assertEqual(['CGACA', 'GAAGA'], dna_reader.clump_finding(
+            'CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGAGTGAAGAGAAGAGGAAACATTGTAA', 5, 50, 4))
+            #CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGA
     # def test_pattern_matching_large_data_set(self):
     #     f = open("./Vibrio_cholerae.txt", 'r')
     #     genome = f.read()
@@ -76,6 +83,21 @@ class TestDnaFixture(unittest.TestCase):
 # [116556, 149355, 151913, 152013, 152394, 186189, 194276, 200076, 224527, 307692, 479770, 610980, 653338, 679985, 768828, 878903, 985368]        
 
         # print(dna_reader.computing_frequencies(genome, 9).count()) # not working. looks to be a bad charater not handled in symbol_to_number(...)
+
+    def test_clump_with_e_coli(self):
+        print('reading file...')
+        f = open("./E_coli_genome.txt", 'r')
+        genome = f.read()
+        f.close()
+        print('file read')
+        
+        print('finding clumps...')
+        #clumps = dna_reader.clump_finding(genome, 9, 500, 3) #1904
+        clumps = dna_reader.clump_finding(genome, 9, 500, 4) #588
+        
+        print(len(clumps))
+        print(len(set(clumps)))
+
 
 if __name__ == '__main__':
     unittest.main()

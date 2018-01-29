@@ -93,36 +93,28 @@ def pattern_matching(Pattern, Genome):
     return pos_record
 
 def clump_finding(genome, k, L, t):
-    #print(len(genome))
     clump = [0] * (4**k) # declare an array of zeros
 
     text = genome[0: L]
-    print(text)
     frequency_array = computing_frequencies(text, k)
-    print('freq array')
-    print(frequency_array)
     for i in range(0, len(frequency_array)):
-        if frequency_array[i] >= t: clump[i] = 1
+        if frequency_array[i] >= t:
+            clump[i] = 1
 
     for i in range(1, len(genome) - L):
-        first_pattern = genome[i - 1: k]
+        first_pattern = genome[i - 1: i - 1 + k]
         index = pattern_to_number(first_pattern)
         frequency_array[index] -= 1
 
-        last_pattern = genome[i + L - k: k]
+        last_pattern = genome[i + L - k: i + L]
         index = pattern_to_number(last_pattern)
         frequency_array[index] += 1
-
-        print('freq for: ' + str(i))
-        print(frequency_array)
 
         if frequency_array[index] >= t:
             clump[index] = 1
 
-    print(clump)
-
     frequency_patterns = []
-    for i in range(0, 4 * k - 1):
+    for i in range(0, len(clump) - 1):
         if clump[i] == 1:
             pattern = number_to_pattern(i, k)
             frequency_patterns.append(pattern)
